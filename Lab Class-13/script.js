@@ -1,47 +1,70 @@
 
-function addStyle() {
-  var para = document.querySelector("#paraId");
-  para.style.color = "red";
-  para.style.fontSize = "3rem";
-  para.style.fontWeight = "bold";
-  para.style.fontStyle = "italic";
-}
+const para = document.querySelector('#paraId');
+const addButton = document.querySelector('#addButton');
+const removeButton = document.querySelector('#removeButton');
 
+
+const outputSection = document.querySelector('#output-section');
+
+
+function addStyle() {
+    para.classList.add('para-style');
+}
 
 function removeStyle() {
-  var para = document.querySelector("#paraId");
-  para.removeAttribute("style");
-  para.classList.remove("para-style");
+    para.classList.remove('para-style');
 }
+
+function toggleStyle() {
+    para.classList.toggle('para-style');
+}
+
+
+if (addButton) addButton.addEventListener('click', toggleStyle);
+if (removeButton) removeButton.addEventListener('click', removeStyle);
 
 
 function next() {
-  location.href = "Template/index.html";
+    location.href = "templates/next.html";
+}
+
+function back() {
+    window.history.back();
 }
 
 
-function Back() {
-  location.href = "../index.html";
+function writeOutput(text) {
+    const p = document.createElement('p');
+    p.innerHTML = text;
+    outputSection.appendChild(p);
 }
 
-let person = {
-    id : 1,
-    name : 'Shaon Khan',
-    profession : 'Teaching'
-    
+
+const names = ['Hello', 'World', 'BD'];
+names.forEach(name => writeOutput(name));
+
+
+const person = { id: 1, name: "Shaon" };
+for (let key in person) {
+    writeOutput(`${key}: ${person[key]}`);
 }
 
-for(let x in person){
-   
-}
 
-var classBtn = document.querySelector("#classAddBtn");
-classBtn.addEventListener("click", function () {
-  var para = document.querySelector("#paraId");
-  para.classList.add("para-style");
-});
+const numbers = [1, 2, 3, 4];
+numbers.forEach(num => writeOutput(num));
 
-var button = document.querySelector('#addButton');
-button.addEventListener("click",function(c,d){
-   var b = document.querySelector('#paraId');
-})(9,7);
+
+const display = () => "Hello There";
+writeOutput(display());
+
+
+const add = (a, b) => a + b;
+writeOutput("Add: " + add(1, 2));
+
+
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+writeOutput("Even Numbers: " + evenNumbers.join(', '));
+
+
+const squares = numbers.map(num => num * num);
+writeOutput("Squares: " + squares.join(', '));
